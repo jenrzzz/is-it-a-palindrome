@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <title>is it a palindrome?</title>
+    <style type="text/css">
+      body {
+        margin: 40px auto;
+        font-family: "Helvetica Neue", "Helvetica", sans-serif;
+      }
+
+      main {
+        display: flex;
+        align-items: center;
+        padding: 0 10px;
+        color: #444;
+        line-height: 1.6;
+      }
+
+      h1 {
+        line-height: 1.2;
+        text-align: center;
+      }
+
+      #editor {
+        text-align: center;
+        font-size: 18px;
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+        border: 1px solid red;
+      }
+
+      #editor:focus {
+        outline: 0;
+      }
+
+      .palindrome {
+        border: 1px solid green!important;
+      }
+
+    </style>
+    <script type="text/javascript">
+      function isPalindrome (rawText) {
+        var text = rawText.replace(/[^\w]/g, '');
+        for (var i = 0; i < text.length / 2; i++) {
+          if (text[i].toUpperCase() !== text[text.length - 1 - i].toUpperCase())
+            return false;
+        }
+
+        return true;
+      }
+
+      function checkPalindrome (e) {
+        console.info(e);
+        if (isPalindrome(e.target.value)) {
+          e.target.className = 'palindrome';
+          document.getElementById('title').innerText = "it's a palindrome";
+        } else {
+          e.target.className = '';
+          document.getElementById('title').innerText = "it's not a palindrome";
+        }
+      }
+
+      window.onload = function () {
+        document.getElementById('editor').addEventListener('keyup', checkPalindrome);
+      };
+    </script>
+  </head>
+  <body>
+    <h1 id="title">it's a palindrome</h1>
+    <main>
+      <textarea id="editor" class="palindrome" rows="1">
+        Degas, are we not drawn onward, we freer few, drawn onward to new eras aged?
+      </textarea>
+    </main>
+  </body>
+</html>
